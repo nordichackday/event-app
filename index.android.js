@@ -3,6 +3,7 @@ import React, {
   Text,
   Image,
   StyleSheet,
+  Alert,
   TouchableHighlight,
   AppRegistry,
   View,
@@ -16,20 +17,28 @@ class eventapp extends React.Component {
       rowHasChanged: (row1, row2) => row1 !== row2,
     });
     this.state = {
+      selectedLanguage: "English",
       languages: ds.cloneWithRows([
-          {key: 'Suomi', details:''},
-          {key: 'svenska', details:''},
+          {key: 'English'},
+          {key: 'Suomi'},
+          {key: 'svenska'},
           {key: 'norjaksi'},
           {key: 'islanti'},
           {key: 'tanskaksi'}
         ])
     };
   }
+
+  selectLanguage(lang) {
+    this.setState({selectedLanguage: lang});
+  }
+
   _renderRow(data, sectionID, rowID) {
+    const style = (data.key == this.state.selectedLanguage) ? { color: '#00B4C8'} : {};
+
     return (
-        <TouchableHighlight
-          style={styles.buttonContainer}>
-          <Text>{data.key}</Text>
+        <TouchableHighlight onPress={() => this.selectLanguage(data.key)}>
+        <Text style={style}>{data.key}</Text>
         </TouchableHighlight>
         );
   }
@@ -39,7 +48,9 @@ class eventapp extends React.Component {
   render() {
     return(
         <View
+        visibility={() => this.state.selectedLanguage == "English"}
         style={styles.container}>
+        <Text>Debug selected language:{this.state.selectedLanguage}</Text>
         <View style={{flex:0.2}}></View>
         <ListView
         style={styles.listViewContainer}
