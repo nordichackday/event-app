@@ -6,7 +6,7 @@ Install dependancies according to instructions: https://facebook.github.io/react
 
 ## Running
 
-For iOS:
+### For iOS:
 
     $ cd AwesomeProject
 
@@ -14,7 +14,7 @@ For iOS:
     
 OR open ios/AwesomeProject.xcodeproj and hit "Run" button in Xcode    
 
-For Android:
+### For Android:
 
     $ cd AwesomeProject
     
