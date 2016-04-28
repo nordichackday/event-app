@@ -4,6 +4,8 @@
 
 Install dependancies according to instructions: https://facebook.github.io/react-native/docs/getting-started.html#content
 
+If you use Android, install Ganymotion: https://www.genymotion.com/thank-you-freemium/
+
 ## Running
 
 ### For iOS:
@@ -15,8 +17,6 @@ Install dependancies according to instructions: https://facebook.github.io/react
 OR open ios/AwesomeProject.xcodeproj and hit "Run" button in Xcode    
 
 ### For Android:
-
-- Install Ganymotion: https://www.genymotion.com/thank-you-freemium/
 
     $ cd AwesomeProject
     
