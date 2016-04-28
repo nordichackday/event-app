@@ -33,7 +33,7 @@ class eventapp extends Component {
           return (
               <View key={i} style={styles.container}>
                 <Image
-                    source={{uri: "http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png"}}
+                    source={{uri: artist.picture.value}}
                     style={styles.thumbnail}
                 />
                 <View style={styles.rightContainer}>
