@@ -1,50 +1,72 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
-
 import React, {
-  AppRegistry,
-  Component,
-  StyleSheet,
+  ScrollView,
   Text,
-  View
+  Image,
+  StyleSheet,
+  TouchableHighlight,
+  AppRegistry,
+  View,
+  ListView,
 } from 'react-native';
 
-class eventapp extends Component {
-  render() {
+class eventapp extends React.Component {
+  constructor(props){
+    super(props);
+    var ds = new ListView.DataSource({
+      rowHasChanged: (row1, row2) => row1 !== row2,
+    });
+    this.state = {
+      languages: ds.cloneWithRows([
+          {key: 'Suomi', details:''},
+          {key: 'svenska', details:''},
+          {key: 'norjaksi'},
+          {key: 'islanti'},
+          {key: 'tanskaksi'}
+        ])
+    };
+  }
+  _renderRow(data, sectionID, rowID) {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.android.js
-        </Text>
-        <Text style={styles.instructions}>
-          Shake or press menu button for dev menu
-        </Text>
-      </View>
-    );
+        <TouchableHighlight
+          style={styles.buttonContainer}>
+          <Text>{data.key}</Text>
+        </TouchableHighlight>
+        );
+  }
+  _renderHeader() {
+    return (<Text style={styles.header}>CHOOSE{"\n"}LANGUAGE</Text>);
+  }
+  render() {
+    return(
+        <View
+        style={styles.container}>
+        <View style={{flex:0.2}}></View>
+        <ListView
+        style={styles.listViewContainer}
+        dataSource={this.state.languages}
+        renderRow={this._renderRow.bind(this)}
+        renderHeader={this._renderHeader.bind(this)}
+        initialListSize={5}/>
+        </View>
+        )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  header: {
+    fontSize: 40,
+    textAlign: 'left',
+    flex: 0.8
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  buttonContainer: {
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: '#d6d7da',
   },
 });
 
