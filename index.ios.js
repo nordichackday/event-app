@@ -13,52 +13,58 @@ import React, {
   View
 } from 'react-native';
 
-var MOCKED_ARTIST_DATA = [
-  {name: 'Eirikur Haukson', country: 'Iceland', image: 'https://upload.wikimedia.org/wikipedia/commons/a/a0/Eirikur_Hauksson.jpg'},
-  {name: 'Tommi Läntinen', country: 'Finland', image: 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Tommi_l%C3%A4ntinen_4.jpg'},
-  {name: 'Röyksopp', country: 'Iceland', image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Royksopp_in_performance_(Fuji_Rock_Festival,_Naeba,_Niigata,_Japan_-_summer_of_2005).jpg'},
-];
-var artist = MOCKED_ARTIST_DATA[0];
+import api from './common/util/api.js'
 
 class eventapp extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { artists: [] }
+  }
+  componentWillMount() {
+    api.getArtistsForCurrentYear()
+        .then((artists) => {
+          this.setState({artists: artists.data.results.bindings})
+        })
+  }
   render() {
     return (
-      <View>
-        {this.renderMovie(MOCKED_ARTIST_DATA[0])}
-        {this.renderMovie(MOCKED_ARTIST_DATA[1])}
-        {this.renderMovie(MOCKED_ARTIST_DATA[2])}
-      </View>
-    );
-  }
-  renderMovie(artist) {
-    return (
-      <View style={styles.container}>
-        <Image
-          source={{uri: artist.image}}
-          style={styles.thumbnail}
-        />
-        <View style={styles.rightContainer}>
-          <Text style={styles.artistName}>{artist.name}</Text>
-          <Text style={styles.artistCountry}>{artist.country}</Text>
-        </View>
+      <View style={styles.page}>
+        {this.state.artists.map(function(artist, i){
+          return (
+              <View key={i} style={styles.container}>
+                <Image
+                    source={{uri: "http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png"}}
+                    style={styles.thumbnail}
+                />
+                <View style={styles.rightContainer}>
+                  <Text style={styles.artistName}>{artist.humanLabel.value}</Text>
+                  <Text style={styles.artistCountry}>{artist.country}</Text>
+                </View>
+              </View>
+          );
+        })}
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  page: {
+    marginTop: 20,
+  },
   container: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginBottom: 5,
   },
   rightContainer: {
     flex: 1,
   },
   thumbnail: {
-    width: 53,
+    width: 81,
     height: 81,
   },
   artistName: {
