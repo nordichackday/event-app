@@ -16,6 +16,8 @@ OR open ios/AwesomeProject.xcodeproj and hit "Run" button in Xcode
 
 ### For Android:
 
+- Install Ganymotion: https://www.genymotion.com/thank-you-freemium/
+
     $ cd AwesomeProject
     
     $ react-native run-android
