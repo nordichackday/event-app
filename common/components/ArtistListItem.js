@@ -13,7 +13,7 @@ export default class ArtistListItem extends Component {
     return(
       <View style={styles.container}>
         <Image
-            source={{uri: "http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png"}}
+            source={{uri: this.props.artist.picture.value}}
             style={styles.thumbnail}
         />
         <View style={styles.rightContainer}>
