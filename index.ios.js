@@ -6,8 +6,10 @@
 
 import React, {
   AppRegistry,
+  Alert,
   Component,
   Image,
+  ListView,
   StyleSheet,
   Text,
   View
@@ -30,12 +32,30 @@ class eventapp extends Component {
   render() {
     return (
       <View style={styles.page}>
-        {this.state.artists.map(function(artist, i){
-          return (
-              <ArtistListItem key={i} artist={artist}/>
-          );
-        })}
+        <ArtistList artists={this.state.artists}/>
       </View>
+    );
+  }
+}
+
+class ArtistList extends Component {
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {dataSource: ds.cloneWithRows([{humanLabel:{value:"Linda"}, country:"Suomiiii!"}])};
+  }
+  componentWillReceiveProps(nextProps) {
+    Alert.alert('got', nextProps)
+    this.setState({
+      dataSource: nextProps.artists
+    });
+  }
+  render() {
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <ArtistListItem artist={rowData}/>}
+      />
     );
   }
 }
