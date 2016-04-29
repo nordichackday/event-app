@@ -23,7 +23,7 @@ class eventapp extends Component {
     this.state = { artists: [] }
   }
   componentWillMount() {
-    api.getArtistsForCurrentYear('en', 2015)
+    api.getArtistsForCurrentYear('fi', 2015)
         .then((artists) => {
           this.setState({artists: artists.data.results.bindings})
         })
@@ -31,8 +31,9 @@ class eventapp extends Component {
   render() {
     return (
       <View style={styles.page}>
-        <Button onPress={this.switchLanguage('en', 2015)}>English</Button>
-        <Button onPress={this.switchLanguage('fi', 2015)}>Finnish</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('en', 2015)}>English</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('fi', 2015)}>Finnish</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('sv', 2015)}>Swedish</Button>
 
         {this.state.artists.map(function(artist, i){
           return (
@@ -54,6 +55,14 @@ const styles = StyleSheet.create({
   page: {
     marginTop: 20,
   },
+  button: {
+    borderWidth: 1,
+    width: 200,
+    alignSelf: 'center',
+    marginBottom: 10,
+    color: 'black',
+    backgroundColor: 'lightgray',
+  }
 });
 
 AppRegistry.registerComponent('eventapp', () => eventapp);
