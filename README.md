@@ -25,3 +25,16 @@ OR open ios/AwesomeProject.xcodeproj and hit "Run" button in Xcode
 - Open index.android.js in your text editor of choice and edit some lines.
 - Press the menu button (F2 by default, or ⌘-M in Genymotion) and select Reload JS to see your change!
 - Run adb logcat *:S ReactNative:V ReactNativeJS:V in a terminal to see your app's logs
+
+
+## Testing
+
+The tests require Babel6 and a configuration:
+
+```
+  "babel": {
+    "presets": [
+      "es2015"
+    ]
+  }
+```

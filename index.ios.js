@@ -25,12 +25,12 @@ class eventapp extends Component {
     this.state = { artists: [] }
   }
   componentWillMount() {
-    api.getArtistsForCurrentYear('fi', 2015)
+    api.getArtists('fi', 2015)
         .then((artists) => {
-          this.setState({artists: artists.data.results.bindings})
+          this.setState({artists: artists})
         })
     /*
-    // NOTICE: getMockUsers gives data in a different format from getArtistsForCurrentYear
+    // NOTICE: getMockUsers gives data in a different format from getArtists
     api.getMockUsers()
       .then((artists) => {
         this.setState({artists: artists})
@@ -59,9 +59,9 @@ class eventapp extends Component {
 
 
   switchLanguage(language, year) {
-    api.getArtistsForCurrentYear(language, year)
+    api.getArtists(language, year)
         .then((artists) => {
-          this.setState({artists: artists.data.results.bindings})
+          this.setState({artists: artists})
         })
   }
 }
