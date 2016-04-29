@@ -41,8 +41,8 @@ class eventapp extends Component {
     return (
       <View style={styles.page}>
         <Button style={styles.button} onPress={() => this.switchLanguage('en', 2015)}>English</Button>
-        <Button style={styles.button} onPress={() => this.switchLanguage('fi', 2015)}>Finnish</Button>
-        <Button style={styles.button} onPress={() => this.switchLanguage('sv', 2015)}>Swedish</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('fi', 2015)}>Suomeksi</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('sv', 2015)}>På Svenska</Button>
         <ArtistList artists={this.state.artists}/>
       </View>
     );
