@@ -6,8 +6,10 @@
 
 import React, {
   AppRegistry,
+  Alert,
   Component,
   Image,
+  ListView,
   StyleSheet,
   Text,
   View
@@ -27,6 +29,13 @@ class eventapp extends Component {
         .then((artists) => {
           this.setState({artists: artists.data.results.bindings})
         })
+    /*
+    // NOTICE: getMockUsers gives data in a different format from getArtistsForCurrentYear
+    api.getMockUsers()
+      .then((artists) => {
+        this.setState({artists: artists})
+      })
+    */
   }
   render() {
     return (
@@ -34,20 +43,51 @@ class eventapp extends Component {
         <Button style={styles.button} onPress={() => this.switchLanguage('en', 2015)}>English</Button>
         <Button style={styles.button} onPress={() => this.switchLanguage('fi', 2015)}>Finnish</Button>
         <Button style={styles.button} onPress={() => this.switchLanguage('sv', 2015)}>Swedish</Button>
-
-        {this.state.artists.map(function(artist, i){
-          return (
-              <ArtistListItem key={i} artist={artist}/>
-          );
-        })}
+        <ArtistList artists={this.state.artists}/>
       </View>
     );
   }
+
+/* 
+// static list without ListView
+  {this.state.artists.map(function(artist, i){
+    return (
+        <ArtistListItem key={i} artist={artist}/>
+    );
+  })}
+*/
+
+
   switchLanguage(language, year) {
     api.getArtistsForCurrentYear(language, year)
         .then((artists) => {
           this.setState({artists: artists.data.results.bindings})
         })
+  }
+}
+
+class ArtistList extends Component {
+  constructor(props) {
+    super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {dataSource: ds};
+  }
+  componentWillReceiveProps(nextProps) {
+    // Alert.alert('and the resoponse is:', nextProps.artists)
+    this.setState({
+      dataSource: this.getDataSource(nextProps.artists)
+    })
+  }
+  getDataSource(artists) {
+    return this.state.dataSource.cloneWithRows(artists);
+  }
+  render() {
+    return (
+      <ListView
+        dataSource={this.state.dataSource}
+        renderRow={(rowData) => <ArtistListItem artist={rowData}/>}
+      />
+    );
   }
 }
 
