@@ -13,12 +13,16 @@ export default class ArtistListItem extends Component {
     return(
       <View style={styles.container}>
         <Image
-            source={{uri: this.props.artist.picture.value}}
+            source={{uri: this.props.artist.pictureLabel.value}}
             style={styles.thumbnail}
         />
         <View style={styles.rightContainer}>
           <Text style={styles.artistName}>{this.props.artist.humanLabel.value}</Text>
-          <Text style={styles.artistCountry}>{this.props.artist.country}</Text>
+          <Text style={styles.artistCountry}>{this.props.artist.countryLabel.value}</Text>
+          <Image
+              source={{uri: this.props.artist.flagImageLabel.value}}
+              style={styles.flag}
+          />
         </View>
       </View>
     )
@@ -40,6 +44,9 @@ const styles = StyleSheet.create({
   thumbnail: {
     width: 81,
     height: 81,
+  },
+  flag: {
+    resizeMode: 'contain',
   },
   artistName: {
     fontSize: 20,
