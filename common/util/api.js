@@ -16,6 +16,15 @@ export default {
     return api.get(
       '/sparql?query=SELECT%20?human%20?humanLabel%20WHERE%20%7B%20?human%20wdt:P31%20wd:Q5%20;%20wdt:P1344%20wd:Q15215081%20SERVICE%20wikibase:label%20%7B%20bd:serviceParam%20wikibase:language%20"en"%20%7D%20%7D&format=json'
     );
+  },
+
+  getMockUsers(ms) {
+    return delay(ms).then(()=>[{humanLabel:{value:"Dave"}, country:"UK"}]);
   }
 }
 
+function delay(ms) {
+  return new Promise((resolve, reject) => {
+    setTimeout(resolve, ms);
+  })
+}
