@@ -10,6 +10,14 @@ import React, {
 
 export default class ArtistListItem extends Component {
   render() {
+
+    var twitterText;
+    if (this.props.artist.twitter) {
+      twitterText = '@' + this.props.artist.twitter.value;
+    } else {
+      twitterText = '';
+    }
+
     return(
       <View style={styles.container}>
         <Image
@@ -19,6 +27,7 @@ export default class ArtistListItem extends Component {
         <View style={styles.rightContainer}>
           <Text style={styles.artistCountry}>{this.props.artist.countryLabel.value}</Text>
           <Text style={styles.artistName}>{this.props.artist.humanLabel.value}</Text>
+          <Text style={styles.artistTwitter}>{twitterText}</Text>
           <Image
               source={{uri: this.props.artist.flagImageLabel.value}}
               style={styles.flag}
@@ -48,12 +57,15 @@ const styles = StyleSheet.create({
   flag: {
     resizeMode: 'contain',
   },
-  artistName: {
+  artistCountry: {
+    fontSize: 18,
+    textAlign: 'center',
     marginBottom: 8,
+  },
+  artistName: {
     textAlign: 'center',
   },
-  artistCountry: {
-    fontSize: 20,
+  artistTwitter: {
     textAlign: 'center',
   },
 });
