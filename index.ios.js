@@ -31,9 +31,9 @@ class eventapp extends Component {
   render() {
     return (
       <View style={styles.page}>
-        <Button style={styles.button} onPress={() => this.switchLanguage('en', 2015)}>English</Button>
-        <Button style={styles.button} onPress={() => this.switchLanguage('fi', 2015)}>Finnish</Button>
-        <Button style={styles.button} onPress={() => this.switchLanguage('sv', 2015)}>Swedish</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('en', 2015)}>In English</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('fi', 2015)}>Suomeksi</Button>
+        <Button style={styles.button} onPress={() => this.switchLanguage('sv', 2015)}>På Svenska</Button>
 
         {this.state.artists.map(function(artist, i){
           return (
