@@ -15,6 +15,7 @@ import React, {
 
 import api from './common/util/api.js'
 import ArtistListItem from './common/components/ArtistListItem'
+import Button from 'react-native-button';
 
 class eventapp extends Component {
   constructor(props) {
@@ -22,7 +23,7 @@ class eventapp extends Component {
     this.state = { artists: [] }
   }
   componentWillMount() {
-    api.getArtistsForCurrentYear()
+    api.getArtistsForCurrentYear('en', 2015)
         .then((artists) => {
           this.setState({artists: artists.data.results.bindings})
         })
@@ -30,6 +31,9 @@ class eventapp extends Component {
   render() {
     return (
       <View style={styles.page}>
+        <Button onPress={this.switchLanguage('en', 2015)}>English</Button>
+        <Button onPress={this.switchLanguage('fi', 2015)}>Finnish</Button>
+
         {this.state.artists.map(function(artist, i){
           return (
               <ArtistListItem key={i} artist={artist}/>
@@ -37,6 +41,12 @@ class eventapp extends Component {
         })}
       </View>
     );
+  }
+  switchLanguage(language, year) {
+    api.getArtistsForCurrentYear(language, year)
+        .then((artists) => {
+          this.setState({artists: artists.data.results.bindings})
+        })
   }
 }
 
